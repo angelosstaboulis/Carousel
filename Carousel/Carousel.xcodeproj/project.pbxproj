@@ -227,6 +227,8 @@
 			dependencies = (
 			);
 			name = Carousel;
+			packageProductDependencies = (
+			);
 			productName = Carousel;
 			productReference = D6D980E1262DBE0B002CA6A7 /* Carousel.app */;
 			productType = "com.apple.product-type.application";
@@ -301,6 +303,8 @@
 				Base,
 			);
 			mainGroup = D6D980D8262DBE0B002CA6A7;
+			packageReferences = (
+			);
 			productRefGroup = D6D980E2262DBE0B002CA6A7 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -631,6 +635,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = Carousel/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -650,6 +655,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = Carousel/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

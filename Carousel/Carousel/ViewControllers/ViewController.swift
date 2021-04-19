@@ -7,11 +7,15 @@
 
 import UIKit
 import Toucan
+import Zoomy
 class ViewController: UIViewController {
     let images = [UIImage(named: "image01"),UIImage(named: "image02"),UIImage(named: "image03"),UIImage(named: "image04")]
     var resizedImages:[UIImage]=[]
     @IBOutlet var carousel: Carousel!
     var counter:Int!=0
+    var oldCarousel:CGRect!
+    var oldMainView:CGRect!
+    var oldImageView:CGRect!
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
@@ -39,6 +43,33 @@ extension ViewController:CarouselViewProtocol {
             resizedImages.append(resizedImage!)
         }
         carousel.mainImage.image = resizedImages[counter]
+        carousel.mainImage.isUserInteractionEnabled = true
+        let gesture = UITapGestureRecognizer(target: self, action: #selector(zoomIn(sender:)))
+        gesture.numberOfTapsRequired = 1
+        carousel.mainImage.addGestureRecognizer(gesture)
+    }
+    @objc func zoomIn(sender:UITapGestureRecognizer){
+        oldCarousel = carousel.frame
+        oldMainView = carousel.mainView.frame
+        oldImageView = carousel.mainImage.frame
+        carousel.frame = CGRect(x: -10, y: 100, width: 468, height: 712)
+        carousel.mainView.frame = CGRect(x: -10, y: 100, width: 468, height: 712)
+        carousel.mainImage.frame = CGRect(x: -10, y: 100, width: 468, height: 712)
+        let resizedImage = Toucan(image:resizedImages[counter]).resizeByScaling(CGSize(width: 768, height: 512)).image
+        carousel.mainImage.image  = resizedImage
+        let gesture = UITapGestureRecognizer(target: self, action: #selector(zoomOut(sender:)))
+        gesture.numberOfTapsRequired = 1
+        carousel.mainImage.addGestureRecognizer(gesture)
+    }
+    @objc func zoomOut(sender:UITapGestureRecognizer){
+        carousel.frame = oldCarousel
+        carousel.mainView.frame = oldMainView
+        carousel.mainImage.frame = oldImageView
+        let resizedImage = Toucan(image:resizedImages[counter]).resizeByScaling(CGSize(width: 768, height: 512)).image
+        carousel.mainImage.image  = resizedImage
+        let gesture = UITapGestureRecognizer(target: self, action: #selector(zoomIn(sender:)))
+        gesture.numberOfTapsRequired = 1
+        carousel.mainImage.addGestureRecognizer(gesture)
     }
     func setupView(){
         setHeaderView()
